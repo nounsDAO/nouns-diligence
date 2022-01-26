@@ -25,8 +25,8 @@ task('simulate-proposal', 'Simulate a Nouns governance proposal')
     const proposal = await dao.proposals(id);
     const latestBlock = await provider.getBlock('latest');
 
-    const isPending = proposal.startBlock.gt(latestBlock.number);
-    const startBlock = proposal.startBlock.toNumber();
+    const isPendingOrActive = proposal.endBlock.gt(latestBlock.number);
+    const endBlock = proposal.endBlock.toNumber();
 
     // Start the fork node
     await Promise.race([
@@ -34,15 +34,15 @@ task('simulate-proposal', 'Simulate a Nouns governance proposal')
         port,
         hostname,
         fork: provider.connection.url,
-        ...(!isPending ? { forkBlockNumber: startBlock } : {}),
+        ...(!isPendingOrActive ? { forkBlockNumber: endBlock } : {}),
       }),
       delay(2),
     ]);
 
     // Connect to the fork node, mining until the proposal start block if necessary
     const fork = new providers.JsonRpcProvider(`http://${hostname}:${port}/`);
-    if (isPending) {
-      await mineTo(startBlock, fork);
+    if (isPendingOrActive) {
+      await mineTo(endBlock, fork);
     }
 
     // Attach the DAO contract to the fork
@@ -54,9 +54,6 @@ task('simulate-proposal', 'Simulate a Nouns governance proposal')
       getProposalForVoteStorageKey(id),
       utils.hexZeroPad(EthersBN.from(SIMULATED_VOTE_COUNT).toHexString(), 32),
     ]);
-
-    // Mine until the end of the voting period
-    await mineTo(startBlock + VOTING_PERIOD, fork);
 
     // Queue the proposal
     await dao.queue(id);
