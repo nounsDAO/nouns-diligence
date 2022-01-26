@@ -1,5 +1,5 @@
+import { ETHEREUM_HTTP_URL, TENDERLY_PROJECT, TENDERLY_USERNAME } from './src/config';
 import { HardhatUserConfig } from 'hardhat/config';
-import { ETHEREUM_HTTP_URL } from './src/config';
 import '@tenderly/hardhat-tenderly';
 import '@nomiclabs/hardhat-ethers';
 import './src/tasks';
@@ -9,6 +9,10 @@ const config: HardhatUserConfig = {
     mainnet: {
       url: ETHEREUM_HTTP_URL,
     },
+  },
+  tenderly: {
+    project: TENDERLY_PROJECT,
+    username: TENDERLY_USERNAME,
   },
 };
 export default config;

@@ -4,7 +4,7 @@ import {
   SIMULATED_VOTE_COUNT,
   VOTING_PERIOD,
 } from '../config';
-import { delay, getProposalForVoteStorageKey, mineTo } from '../utils';
+import { delay, getProposalForVoteStorageKey, keypress, mineTo } from '../utils';
 import { ChainId, getContractsForChainOrThrow } from '@nouns/sdk';
 import { BigNumber as EthersBN, providers, utils, Wallet } from 'ethers';
 import { TASK_NODE } from 'hardhat/builtin-tasks/task-names';
@@ -69,4 +69,7 @@ task('simulate-proposal', 'Simulate a Nouns governance proposal')
     const { hash } = await dao.execute(id);
 
     console.log(`Execution Transaction Hash: ${hash}`);
+    console.log('Export this hash to Tenderly and press any key to exit.');
+
+    await keypress();
   });

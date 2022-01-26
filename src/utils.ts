@@ -33,3 +33,16 @@ export const mineTo = async (targetBlock: number, provider: providers.JsonRpcPro
 export const delay = (seconds: number) => {
   return new Promise(resolve => setTimeout(resolve, seconds * 1000));
 };
+
+/**
+ * Wait for any keypress
+ */
+export const keypress = async () => {
+  process.stdin.setRawMode(true);
+  return new Promise(resolve =>
+    process.stdin.once('data', () => {
+      process.stdin.setRawMode(false);
+      resolve(true);
+    }),
+  );
+};
