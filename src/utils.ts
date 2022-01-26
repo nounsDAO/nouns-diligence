@@ -1,36 +1,6 @@
-import { Block } from '@ethersproject/abstract-provider';
-import { Proposal, ProposalState } from './types';
 import { BigNumber as EthersBN, providers } from 'ethers';
-import { FOR_VOTE_MEMBER_INDEX, GRACE_PERIOD } from './config';
 import { solidityKeccak256 } from 'ethers/lib/utils';
-
-export const getProposalState = (proposal: Proposal, block: Block) => {
-  if (proposal.vetoed) {
-    return ProposalState.VETOED;
-  }
-  if (proposal.canceled) {
-    return ProposalState.CANCELED;
-  }
-  if (EthersBN.from(block.number).lte(proposal.startBlock)) {
-    return ProposalState.PENDING;
-  }
-  if (EthersBN.from(block.number).lte(proposal.endBlock)) {
-    return ProposalState.ACTIVE;
-  }
-  if (proposal.forVotes.lte(proposal.againstVotes) || proposal.forVotes.lt(proposal.quorumVotes)) {
-    return ProposalState.DEFEATED;
-  }
-  if (proposal.eta.eq(0)) {
-    return ProposalState.SUCCEEDED;
-  }
-  if (proposal.executed) {
-    return ProposalState.EXECUTED;
-  }
-  if (EthersBN.from(block.timestamp).gte(proposal.eta.add(GRACE_PERIOD))) {
-    return ProposalState.EXPIRED;
-  }
-  return ProposalState.QUEUED;
-};
+import { FOR_VOTE_MEMBER_INDEX } from './config';
 
 /**
  * Get the `forVotes` storage key for the passed proposal id
