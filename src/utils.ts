@@ -1,4 +1,4 @@
-import { BigNumber as EthersBN, providers } from 'ethers';
+import { BigNumber as EthersBN, Contract, providers } from 'ethers';
 import { solidityKeccak256 } from 'ethers/lib/utils';
 import { FOR_VOTE_MEMBER_INDEX } from './config';
 
@@ -9,6 +9,29 @@ import { FOR_VOTE_MEMBER_INDEX } from './config';
 export const getProposalForVoteStorageKey = (proposalId: number) => {
   const hash = solidityKeccak256(['uint256', 'uint256'], [proposalId, FOR_VOTE_MEMBER_INDEX]);
   return EthersBN.from(hash).add(FOR_VOTE_MEMBER_INDEX).toHexString();
+};
+
+/**
+ * Mint until the passed noun id is reached
+ * @param nounsToken The Nouns token contract
+ * @param targetNounId The target noun id
+ * @param provider The Hardhat provider
+ * @param minter The address that has the minter role
+ */
+export const mintTo = async (
+  nounsToken: Contract,
+  targetNounId: number,
+  provider: providers.JsonRpcProvider,
+  minter: string,
+) => {
+  await provider.send('hardhat_impersonateAccount', [minter]);
+
+  const signer = provider.getSigner(minter);
+  const contract = nounsToken.connect(signer);
+
+  while ((await contract.totalSupply()) < targetNounId) {
+    await contract.mint();
+  }
 };
 
 /**

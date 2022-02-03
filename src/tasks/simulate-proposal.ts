@@ -1,8 +1,9 @@
 import {
   ETHEREUM_HTTP_URL,
   LOCAL_PRIVATE_KEY,
+  NODE_HOSTNAME,
+  NODE_PORT,
   SIMULATED_VOTE_COUNT,
-  VOTING_PERIOD,
 } from '../config';
 import { delay, getProposalForVoteStorageKey, keypress, mineTo } from '../utils';
 import { ChainId, getContractsForChainOrThrow } from '@nouns/sdk';
@@ -12,9 +13,7 @@ import { task, types } from 'hardhat/config';
 
 task('simulate-proposal', 'Simulate a Nouns governance proposal')
   .addParam('id', 'The Nouns proposal ID', undefined, types.int)
-  .addOptionalParam('hostname', 'The Local Fork Host Name', '127.0.0.1', types.string)
-  .addOptionalParam('port', 'The Local Fork Port', 8545, types.int)
-  .setAction(async ({ id, hostname, port }, { run }) => {
+  .setAction(async ({ id }, { run }) => {
     const provider = new providers.JsonRpcProvider(ETHEREUM_HTTP_URL);
 
     let { nounsDaoContract: dao } = getContractsForChainOrThrow(
@@ -31,8 +30,8 @@ task('simulate-proposal', 'Simulate a Nouns governance proposal')
     // Start the fork node
     await Promise.race([
       run(TASK_NODE, {
-        port,
-        hostname,
+        port: NODE_PORT,
+        hostname: NODE_HOSTNAME,
         fork: provider.connection.url,
         ...(!isPendingOrActive ? { forkBlockNumber: endBlock } : {}),
       }),
@@ -40,7 +39,7 @@ task('simulate-proposal', 'Simulate a Nouns governance proposal')
     ]);
 
     // Connect to the fork node, mining until the proposal start block if necessary
-    const fork = new providers.JsonRpcProvider(`http://${hostname}:${port}/`);
+    const fork = new providers.JsonRpcProvider(`http://${NODE_HOSTNAME}:${NODE_PORT}/`);
     if (isPendingOrActive) {
       await mineTo(endBlock, fork);
     }

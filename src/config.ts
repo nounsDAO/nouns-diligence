@@ -2,6 +2,16 @@ import dotenv from 'dotenv';
 
 dotenv.config();
 
+// Node Fields
+
+// Local fork node hostname
+export const NODE_HOSTNAME = '127.0.0.1';
+
+// Local fork node port
+export const NODE_PORT = 8545;
+
+// Proposal Fields
+
 // 14 days in seconds
 export const GRACE_PERIOD = 60 * 60 * 24 * 14;
 
