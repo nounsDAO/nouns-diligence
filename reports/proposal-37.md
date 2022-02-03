@@ -20,7 +20,7 @@ The proposal description is as follows:
 
 While this proposal description is accurate, there's a small clarification to be made:
 
-The Noun supply is off by 1 compared to Noun IDs, so this change would allow single vote holders to submit a proposal prior to the existence of the Noun with ID **399**, when the total Noun supply is 400. Without this change, proposals created following the minting of Noun **199** will require 2 votes, when the total Noun supply is **200**.
+The Noun supply is off by 1 compared to Noun IDs. This change would allow single vote holders to submit a proposal prior to the existence of the Noun with ID **399**, when the total Noun supply is 400. Without this change, proposals created following the minting of Noun **199** will require 2 votes, when the total Noun supply is **200**.
 
 ## Execution Risks
 
