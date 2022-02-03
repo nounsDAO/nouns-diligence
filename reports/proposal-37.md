@@ -2,7 +2,7 @@
 
 ## Overview
 
-Proposal 37 lowers the proposal threshold basis points value in the Nouns DAO contract from 50 to 25.
+Proposal 37 lowers the proposal threshold BPS (basis points) storage value in the Nouns DAO contract from 50 to 25.
 
 **Note**: One basis point is equal to 0.01%.
 
