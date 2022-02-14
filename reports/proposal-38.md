@@ -8,7 +8,7 @@
 
 **Is this proposal description accurate?**
 
-Yes, this proposal creates a streaming payment to `0x2548e6D6F1f0cd0d7f41355ee38066edE6A7eE0a` from February 25, 2022 2:02:45 AM UTC to August 25, 2022 12:00:00 AM for an amount of 62.52414 WETH.
+Yes, this proposal creates a streaming payment to `0x2548e6D6F1f0cd0d7f41355ee38066edE6A7eE0a` from February 25, 2022 2:02:45 AM UTC to August 25, 2022 12:00:00 AM UTC for an amount of 62.52414 WETH.
 
 ## Execution Risks
 
