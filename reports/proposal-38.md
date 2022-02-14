@@ -22,7 +22,7 @@ None.
 
 ### Minor
 
-- This proposal MUST be executed prior to February 25, 2022 2:02:45 AM UTC (Thursday, February 24, 2022 9:02:45 PM EST). Execution will revert if attempted on or after this date time.
+- This proposal MUST be executed prior to February 25, 2022 2:02:45 AM UTC (Thursday, February 24, 2022 9:02:45 PM EST). Execution will revert if attempted after this date time.
 - Sablier smart contract risk, siloed to the 62.52414 WETH deposited to Sablier in this proposal.
 
 ## Audit Required
