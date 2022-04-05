@@ -26,16 +26,19 @@ Included among these are one unavoidable revert that **will** cause the transact
 
 #### Unavoidable REVERTs
 
-1. The `capture` function calls `_safeTransferFrom` to transfer the Rescue Toad to the DAO. This call will revert because the Nouns DAO proxy does not expose a `onERC1155Received` function, which is called in the `_doSafeTransferAcceptanceCheck`. This cannot be remedied prior to execution.
+1. The [capture](https://github.com/haltakov/rescue-toadz/blob/d544264/contract/contracts/RescueToadz.sol#L95) function calls [_safeTransferFrom](https://github.com/haltakov/rescue-toadz/blob/d544264/contract/contracts/RescueToadz.sol#L110) to transfer the Rescue Toad to the DAO. This call will revert because the Nouns DAO proxy does not expose an [onERC1155Received](https://github.com/OpenZeppelin/openzeppelin-contracts/blob/742e85be7c08dff21410ba4aa9c60f6a033befb8/contracts/token/ERC1155/ERC1155.sol#L470) function, which is called in the [_doSafeTransferAcceptanceCheck](https://github.com/OpenZeppelin/openzeppelin-contracts/blob/742e85be7c08dff21410ba4aa9c60f6a033befb8/contracts/token/ERC1155/ERC1155.sol#L186). This cannot be remedied prior to execution.
 
 #### Possible REVERTs
 
-1. At time of writing, Rescue Toad #15 does not exist. This will cause the first revert, but it can be remedied prior to execution by minting Toad #15.
+1. At time of writing, Rescue Toad #15 does not exist. This has the potential to cause the first revert, but can be remedied prior to execution by minting Toad #15.
+    - [Failure Condition](https://github.com/haltakov/rescue-toadz/blob/d544264/contract/contracts/RescueToadz.sol#L100)
 2. Anyone can cause the proposal transaction to fail by donating an amount greater than the DAO's donation to any of the 7 Rescue Toadz listed in the proposal.
+    - [Failure Condition](https://github.com/haltakov/rescue-toadz/blob/d544264/contract/contracts/RescueToadz.sol#L101-L104)
 
 ### Minor
 
 The owner of the Rescue Toadz contract has the ability to cause the proposal transaction to fail by pausing the contract prior to execution.
+  - [Failure Condition](https://github.com/OpenZeppelin/openzeppelin-contracts/blob/4a9cc8b4918ef3736229a5cc5a310bdc17bf759f/contracts/security/Pausable.sol#L52)
 
 ## Audit Required
 
