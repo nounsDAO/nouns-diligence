@@ -26,7 +26,7 @@ Included among these are one unavoidable revert that **will** cause the transact
 
 #### Unavoidable REVERTs
 
-1. The [capture](https://github.com/haltakov/rescue-toadz/blob/d544264/contract/contracts/RescueToadz.sol#L95) function calls [_safeTransferFrom](https://github.com/haltakov/rescue-toadz/blob/d544264/contract/contracts/RescueToadz.sol#L110) to transfer the Rescue Toad to the DAO. This call will revert because the Nouns DAO proxy does not expose an [onERC1155Received](https://github.com/OpenZeppelin/openzeppelin-contracts/blob/742e85be7c08dff21410ba4aa9c60f6a033befb8/contracts/token/ERC1155/ERC1155.sol#L470) function, which is called in the [_doSafeTransferAcceptanceCheck](https://github.com/OpenZeppelin/openzeppelin-contracts/blob/742e85be7c08dff21410ba4aa9c60f6a033befb8/contracts/token/ERC1155/ERC1155.sol#L186). This cannot be remedied prior to execution.
+1. The [capture](https://github.com/haltakov/rescue-toadz/blob/d544264/contract/contracts/RescueToadz.sol#L95) function calls [_safeTransferFrom](https://github.com/haltakov/rescue-toadz/blob/d544264/contract/contracts/RescueToadz.sol#L110) to transfer the Rescue Toad to the DAO. This call will revert because the Nouns DAO executor does not expose an [onERC1155Received](https://github.com/OpenZeppelin/openzeppelin-contracts/blob/742e85be7c08dff21410ba4aa9c60f6a033befb8/contracts/token/ERC1155/ERC1155.sol#L470) function, which is called in the [_doSafeTransferAcceptanceCheck](https://github.com/OpenZeppelin/openzeppelin-contracts/blob/742e85be7c08dff21410ba4aa9c60f6a033befb8/contracts/token/ERC1155/ERC1155.sol#L186). This cannot be remedied prior to execution.
 
 #### Possible REVERTs
 
