@@ -31,7 +31,8 @@ None.
 
 ### Minor
 
-There is one possible, yet unlikely, revert condition. Details of this condition will be released at a later time.
+- There is one possible, yet unlikely, revert condition. Details of this condition will be released at a later time.
+- Minor smart contract risk, siloed to the 51 ETH sent in the proposal.
 
 ## Audit Required
 
