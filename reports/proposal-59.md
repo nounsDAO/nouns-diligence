@@ -1,4 +1,4 @@
-# Proposal 50: Gamify fundraising for Ukraine by donating 51 ETH through the Rescue Toadz project
+# Proposal 59: Gamify fundraising for Ukraine by donating 51 ETH through the Rescue Toadz project
 
 ## Overview
 
