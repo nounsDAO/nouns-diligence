@@ -26,7 +26,17 @@ None.
 
 ### Major
 
-None.
+To normalize both quorum votes and the proposal threshold, votes are considered from the proposal creation block. This logic can be found in the [NounsDAOLogicV1](https://github.com/nounsDAO/nouns-monorepo/blob/master/packages/nouns-contracts/contracts/governance/NounsDAOLogicV1.sol#L508) contract.
+
+Note that `castVoteInternal` uses the current `votingDelay` to determine when the vote snapshot is taken, rather than a value that's cached at the time of proposal creation.
+
+This has a couple side effects:
+
+- Proposals that are **pending** at the time this proposal is executed will use a snapshot that's 13,445 blocks, or roughly 2.02 days, before the expected proposal creation snapshot.
+- Proposals that are **active** at the time this proposal is executed will begin to use the old snapshot. Unlike pending proposals, this could allow a voter to vote twice on the same proposal under the following circumstances:
+    - The Noun owner or delegate already voted on the active proposal prior to the execution of this proposal AND they transferred or re-delegated their Nouns between the two snapshots.
+
+It is recommended that no changes to the `votingDelay` occur until the Nouns DAO logic contract is patched. This issue does NOT affect the `votingPeriod`, which can be updated prior to the patch.
 
 ### Minor
 
