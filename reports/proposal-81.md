@@ -22,7 +22,7 @@ None.
 
 ### Major
 
-None.
+- There is a conditional risk, dependent on the outcome of [proposal 82](./proposal-82.md). If proposal 82 succeeds and is executed after this proposal, it will overwrite the on-chain listing included in this proposal.
 
 ### Minor
 
