@@ -12,7 +12,7 @@ const { expect } = chai;
  * This suite validates that the on-chain private offer can be filled
  * by the Lil Nouns treasury.
  */
-describe('Proposal 81', () => {
+describe('Proposal 82', () => {
   const MOCK_ADMIN = '0x000000000000000000000000000000000000dEaD';
   const NOUNS_TOKEN = '0x9C8fF314C9Bc7F6e59A9d9225Fb22946427eDC03';
   const NOUNS_DAO_TREASURY = '0x0BC3807Ec262cB779b38D65b38158acC3bfedE10';
@@ -21,7 +21,7 @@ describe('Proposal 81', () => {
 
   const FILL_ASK_SIGNATURE = 'fillAsk(address,uint256)';
   const OFFERED_NOUN_ID = 253;
-  const PRICE = utils.parseEther('4.2069');
+  const PRICE = utils.parseEther('69.42');
 
   const provider = new providers.JsonRpcProvider(`http://${NODE_HOSTNAME}:${NODE_PORT}/`);
 
