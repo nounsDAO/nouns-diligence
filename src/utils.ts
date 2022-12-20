@@ -1,4 +1,4 @@
-import { BigNumber as EthersBN, Contract, providers } from 'ethers';
+import { BigNumber as EthersBN, Contract, providers, utils } from 'ethers';
 import { solidityKeccak256 } from 'ethers/lib/utils';
 import { FOR_VOTE_MEMBER_INDEX } from './config';
 
@@ -8,7 +8,7 @@ import { FOR_VOTE_MEMBER_INDEX } from './config';
  */
 export const getProposalForVoteStorageKey = (proposalId: number) => {
   const hash = solidityKeccak256(['uint256', 'uint256'], [proposalId, FOR_VOTE_MEMBER_INDEX]);
-  return EthersBN.from(hash).add(FOR_VOTE_MEMBER_INDEX).toHexString();
+  return utils.hexStripZeros(EthersBN.from(hash).add(FOR_VOTE_MEMBER_INDEX).toHexString());
 };
 
 /**
