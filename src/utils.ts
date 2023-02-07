@@ -44,9 +44,7 @@ export const mintTo = async (
 export const mineTo = async (targetBlock: number, provider: providers.JsonRpcProvider) => {
   const latestBlock = await provider.getBlock('latest');
   const blocksToMine = targetBlock - latestBlock.number;
-  for (let i = 0; i < blocksToMine; i++) {
-    await provider.send('evm_mine', []);
-  }
+  await provider.send('hardhat_mine', [utils.hexStripZeros(utils.hexlify(blocksToMine))]);
 };
 
 /**
